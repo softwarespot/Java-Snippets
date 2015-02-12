@@ -72,7 +72,7 @@
 
 	<dl>
 		<dt>
-			POST /shorten?url=<strong>http://www.haaga-helia.fi</strong>
+			POST /shorten?url=<strong>http://www.github.com/softwarespot</strong>
 		</dt>
 		<dd>
 			<strong>Param:</strong> url - A valid url which begins with http(s)<br />
