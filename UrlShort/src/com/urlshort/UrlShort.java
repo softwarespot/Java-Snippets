@@ -4,6 +4,7 @@ package com.urlshort;
  * @author SoftwareSpot
  */
 public class UrlShort {
+	// Java bean
     private final int id;
 
     private final String shortId;
