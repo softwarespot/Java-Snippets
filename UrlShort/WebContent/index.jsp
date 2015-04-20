@@ -35,20 +35,20 @@ pageEncoding="UTF-8"%>
         .container h1 {
             text-align: center;
         }
-        
+
         .blue,
         .blue input[type='submit'] {
             color: #fafafa;
         }
-        
+
         .blue {
             background: #3498db;
         }
-        
+
         .blue input[type='submit'] {
             background: #e74c3c;
         }
-        
+
         .blue input[type='text'] {
             color: #222;
         }
@@ -88,6 +88,7 @@ pageEncoding="UTF-8"%>
                 <li>Use of static, final and primitive datatypes</li>
                 <li>Base 36 encoding (encoding an integer into a unique id e.g. 4096 => FFYT0)</li>
                 <li>Servlet design</li>
+                <li>JavaScript Object Notation (JSON)</li>
             </ol>
         </div>
     </div>
@@ -96,8 +97,7 @@ pageEncoding="UTF-8"%>
 <section class="container blue">
     <h2>API</h2>
 
-    <p>The API consists of GET and POST requests only, with an optional DELETE to clear the database (for demo
-        purposes
+    <p>The API consists of GET and POST requests only, with an optional DELETE to clear the database (for demonstration purposes
         only).</p>
 
     <p><strong>Note:</strong> To access the API from outside the website, first create a connection to the
@@ -116,10 +116,7 @@ pageEncoding="UTF-8"%>
                 </dt>
                 <dd>
                     <strong>Param:</strong> shortid - A valid short id containing 5 characters from 0-9, A-Z.<br/>
-                    <strong>Success:</strong> An associated url with the short id<br/>
-                    <strong>Error:</strong> Short id is null or empty OR Short id is an invalid format OR Not found in
-                    the
-                    database
+                    <strong>Return:</strong> { "success": true/false, "id": shortId/null, "message": null/error message, "url": url/null }
                 </dd>
             </dl>
         </div>
@@ -139,10 +136,7 @@ pageEncoding="UTF-8"%>
                 </dt>
                 <dd>
                     <strong>Param:</strong> url - A valid url which begins with http(s)<br/>
-                    <strong>Success:</strong> A short id associated with the url<br/>
-                    <strong>Error</strong>:
-                    Url is null or empty OR Url is an invalid format OR Not inserted into
-                    the database
+                    <strong>Return:</strong> { "success": true/false, "id": shortId/null, "message": null/error message, "url": url/null }
                 </dd>
             </dl>
         </div>
@@ -156,7 +150,7 @@ pageEncoding="UTF-8"%>
 
 <section class="container">
     <p>As this is a demonstration and not a fully functioning site, a button to clear the database has been included as
-        means of showing the SQLite/MariaDb is indeed working as one would expect</p>
+        means of showing the SQLite/MariaDb is indeed working as one would expect. Check the console output for additional messages.</p>
     <button type="button" onclick="destroy()">Clear DB</button>
     <p><strong>Note:</strong> This will clear the contents of the database.</p>
 </section>

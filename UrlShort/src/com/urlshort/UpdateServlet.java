@@ -1,13 +1,16 @@
 package com.urlshort;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+
+import org.json.simple.JSONObject;
 
 /**
  * Servlet implementation class UpdateServlet
@@ -16,70 +19,80 @@ import java.util.ArrayList;
  */
 @WebServlet("/shorten")
 public class UpdateServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static String database = UrlShortStrings.EMPTY;
+	private static final long serialVersionUID = 1L;
+	private static String database = UrlShortStrings.EMPTY;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateServlet() {
-        super();
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UpdateServlet() {
+		super();
+	}
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/plain");
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType(UrlShortStrings.WRITE_JSON);
 
-        // PrintWriter for writing to the response
-        final PrintWriter print = response.getWriter();
+		// Retrieve the url parameter e.g. POST /shorten?url=http://www.example.com
+		final String url = request.getParameter("url");
 
-        // Retrieve the url parameter e.g. POST /shorten?url=http://www.example.com
-        final String url = request.getParameter("url");
+		// Create a new data access object.
+		final UrlDAO urlDAO = new UrlDAO(database);
 
-        // Create a new data access object.
-        final UrlDAO urlDAO = new UrlDAO(database);
+		// Determine whether successful or not.
+		boolean isSuccess = false;
+		String message;
+		if (url == null || url.isEmpty()) {
+			message = UrlShortStrings.UPDATE_NULL_OR_EMPY;
+		} else if (!UrlShortHelper.isValidUrl(url)) {
+			message = UrlShortStrings.UPDATE_INVALID_FORMAT;
+		} else {
+			final UrlShort urlShort = urlDAO.insert(url);
+			if (urlShort == null) {
+				message = UrlShortStrings.UPDATE_NOT_INSERTED;
+			} else {
+				isSuccess = true;
+				message = urlShort.getShortId();
+			}
+		}
 
-        // Determine whether successful or not.
-        boolean isSuccess = false;
-        if (url == null || url.isEmpty()) {
-            print.println(UrlShortStrings.UPDATE_NULL_OR_EMPY);
-        } else if (!UrlShortHelper.isValidUrl(url)) {
-            print.println(UrlShortStrings.UPDATE_INVALID_FORMAT);
-        } else {
-            final UrlShort urlShort = urlDAO.insert(url);
-            if (urlShort == null) {
-                print.println(UrlShortStrings.UPDATE_NOT_INSERTED);
-            } else {
-                isSuccess = true;
-                print.println(UrlShortStrings.SUCCESS_ONLY + urlShort.getUrl());
-            }
-        }
+		final JSONObject json = new JSONObject();
+		json.put(UrlShortStrings.JSON_KEY_ID, isSuccess ? message : null);
+		json.put(UrlShortStrings.JSON_KEY_MESSAGE, isSuccess ? null : message);
+		json.put(UrlShortStrings.JSON_KEY_SUCCESS, isSuccess);
+		json.put(UrlShortStrings.JSON_KEY_URL, isSuccess ? url : null);
 
-        print.println();
-        final ArrayList<UrlShort> list = urlDAO.getUrlShorts();
-        if (list.isEmpty()) {
-            print.println(UrlShortStrings.DATABASE_EMPTY);
-        } else {
-            print.println(UrlShortStrings.DEMO);
-            for (final UrlShort us : list) {
-                print.println(us);
-                print.println();
-            }
-        }
+		final ArrayList<UrlShort> list = urlDAO.getUrlShorts();
+		if (list.isEmpty()) {
+			System.out.println(UrlShortStrings.DATABASE_EMPTY);
+		} else {
+			System.out.println(UrlShortStrings.DEMO);
+			for (final UrlShort us : list) {
+				System.out.println(us);
+				System.out.println();
+			}
+		}
 
-        // Close the printing object.
-        print.close();
+		// PrintWriter for writing to the response
+		final PrintWriter print = response.getWriter();
 
-        // Set the appropriate status code.
-        response.setStatus(isSuccess ? HttpServletResponse.SC_OK : HttpServletResponse.SC_NOT_FOUND);
-    }
+		// Print the json
+				print.println(json);
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        database = getServletContext().getRealPath(UrlShortStrings.DATABASE_PATH);
-    }
+		// Close the printing object.
+		print.close();
+
+		// Set the appropriate status code.
+		response.setStatus(isSuccess ? HttpServletResponse.SC_OK : HttpServletResponse.SC_NOT_FOUND);
+	}
+
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		database = getServletContext().getRealPath(UrlShortStrings.DATABASE_PATH);
+	}
 }
