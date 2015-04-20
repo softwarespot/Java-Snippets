@@ -35,10 +35,22 @@ pageEncoding="UTF-8"%>
         .container h1 {
             text-align: center;
         }
-
+        
+        .blue,
+        .blue input[type='submit'] {
+            color: #fafafa;
+        }
+        
         .blue {
             background: #3498db;
-            color: #fafafa;
+        }
+        
+        .blue input[type='submit'] {
+            background: #e74c3c;
+        }
+        
+        .blue input[type='text'] {
+            color: #222;
         }
     </style>
 </head>
