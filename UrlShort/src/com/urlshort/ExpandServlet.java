@@ -35,37 +35,40 @@ public class ExpandServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Set the response to write JSON
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 
 		// Retrieve the shortid parameter e.g. GET /expand?shortid=ABCDE
 		final String shortId = request.getParameter("shortid");
+
+		// Parameter(s)
+		System.out.println("1. " + shortId);
 
 		// Create a new data access object.
 		final UrlDAO urlDAO = new UrlDAO(database);
 
 		// Determine whether successful or not.
 		boolean isSuccess = false;
-		String message;
+		String message = null, url = null;
 		if (shortId == null || shortId.isEmpty()) {
 			message = UrlShortStrings.EXPAND_NULL_OR_EMPTY;
 		} else if (!UrlShortHelper.isShortId(shortId)) {
-			;
-		message = UrlShortStrings.EXPAND_INVALID_FORMAT;
+			message = UrlShortStrings.EXPAND_INVALID_FORMAT;
 		} else {
 			final UrlShort urlShort = urlDAO.getFromShortId(shortId);
 			if (urlShort == null) {
 				message = UrlShortStrings.EXPAND_NOT_FOUND;
 			} else {
 				isSuccess = true;
-				message = urlShort.getUrl();
+				url = urlShort.getUrl();
 			}
 		}
 
 		final JSONObject json = new JSONObject();
-		json.put(UrlShortStrings.JSON_KEY_ID, isSuccess ? shortId : null);
-		json.put(UrlShortStrings.JSON_KEY_MESSAGE, isSuccess ? null : message);
+		json.put(UrlShortStrings.JSON_KEY_ID, shortId);
+		json.put(UrlShortStrings.JSON_KEY_MESSAGE, message);
 		json.put(UrlShortStrings.JSON_KEY_SUCCESS, isSuccess);
-		json.put(UrlShortStrings.JSON_KEY_URL, isSuccess ? message : null);
+		json.put(UrlShortStrings.JSON_KEY_URL, url);
 
 		final ArrayList<UrlShort> list = urlDAO.getUrlShorts();
 		if (list.isEmpty()) {
@@ -83,6 +86,9 @@ public class ExpandServlet extends HttpServlet {
 
 		// Print the json
 		print.println(json);
+
+		// Debugging only
+		System.out.println(json);
 
 		// Close the printing object.
 		print.close();

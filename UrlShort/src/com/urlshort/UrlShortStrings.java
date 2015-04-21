@@ -17,6 +17,7 @@ final class UrlShortStrings {
 	public static final String REDIRECT_INVALID_FORMAT = "Error: Short id is an invalid format";
 	public static final String REDIRECT_NOT_FOUND = EXPAND_NOT_FOUND;
 	public static final String REDIRECT_NULL_OR_EMPTY = "Error: Short id is null or empty";
+	public static final String UPDATE_ALREADY_EXISTS = "Url already exists";
 	public static final String UPDATE_INVALID_FORMAT = "Url is an invalid format";
 	public static final String UPDATE_NOT_INSERTED = "Not inserted into the database";
 	public static final String UPDATE_NULL_OR_EMPY = "Url is null or empty";

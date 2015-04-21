@@ -35,36 +35,46 @@ public class UpdateServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Set the response to write JSON
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 
 		// Retrieve the url parameter e.g. POST /shorten?url=http://www.example.com
 		final String url = request.getParameter("url");
+
+		// Parameter(s)
+		System.out.println("1. " + url);
 
 		// Create a new data access object.
 		final UrlDAO urlDAO = new UrlDAO(database);
 
 		// Determine whether successful or not.
 		boolean isSuccess = false;
-		String message;
+		String message = null, shortId = null;
 		if (url == null || url.isEmpty()) {
 			message = UrlShortStrings.UPDATE_NULL_OR_EMPY;
 		} else if (!UrlShortHelper.isValidUrl(url)) {
 			message = UrlShortStrings.UPDATE_INVALID_FORMAT;
 		} else {
-			final UrlShort urlShort = urlDAO.insert(url);
+			UrlShort urlShort = urlDAO.insert(url);
 			if (urlShort == null) {
-				message = UrlShortStrings.UPDATE_NOT_INSERTED;
+				urlShort = urlDAO.getFromUrl(url);
+				if (urlShort == null) {
+					message = UrlShortStrings.UPDATE_NOT_INSERTED;
+				} else {
+					message = UrlShortStrings.UPDATE_ALREADY_EXISTS;
+					shortId = urlShort.getShortId();
+				}
 			} else {
 				isSuccess = true;
-				message = urlShort.getShortId();
+				shortId = urlShort.getShortId();
 			}
 		}
 
 		final JSONObject json = new JSONObject();
-		json.put(UrlShortStrings.JSON_KEY_ID, isSuccess ? message : null);
-		json.put(UrlShortStrings.JSON_KEY_MESSAGE, isSuccess ? null : message);
+		json.put(UrlShortStrings.JSON_KEY_ID, shortId);
+		json.put(UrlShortStrings.JSON_KEY_MESSAGE, message);
 		json.put(UrlShortStrings.JSON_KEY_SUCCESS, isSuccess);
-		json.put(UrlShortStrings.JSON_KEY_URL, isSuccess ? url : null);
+		json.put(UrlShortStrings.JSON_KEY_URL, url);
 
 		final ArrayList<UrlShort> list = urlDAO.getUrlShorts();
 		if (list.isEmpty()) {
@@ -81,7 +91,10 @@ public class UpdateServlet extends HttpServlet {
 		final PrintWriter print = response.getWriter();
 
 		// Print the json
-				print.println(json);
+		print.println(json);
+
+		// Debugging only
+		System.out.println(json);
 
 		// Close the printing object.
 		print.close();
