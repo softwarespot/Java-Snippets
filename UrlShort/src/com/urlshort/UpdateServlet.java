@@ -35,6 +35,8 @@ public class UpdateServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("UPDATESERVLET");
+		
 		// Set the response to write JSON
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 

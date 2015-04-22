@@ -35,6 +35,8 @@ public class ExpandServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("EXPANDSERVLET");
+		
 		// Set the response to write JSON
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 

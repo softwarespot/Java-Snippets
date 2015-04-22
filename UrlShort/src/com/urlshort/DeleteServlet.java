@@ -35,6 +35,8 @@ public class DeleteServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//System.out.println("DELETESERVLET");
+		
 		// Set the response to write JSON
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 		
