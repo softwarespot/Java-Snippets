@@ -18,48 +18,48 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet">
     <style type="text/css">
         /*Body styling*/
-        
+
         body {
             color: #222;
             font-family: 'Open Sans', sans-serif, Arial;
             height: 100%;
             position: relative;
         }
-        
+
         form {
             margin: 0;
             padding: 0;
         }
-        
+
         .container {
             margin: 0;
             max-width: none;
             padding: 20px;
             width: 100%;
         }
-        
+
         .container button,
         .container h1 {
             text-align: center;
         }
-        
+
         .blue,
         .blue input[type='submit'] {
             color: #fafafa;
         }
-        
+
         .blue {
             background: #3498db;
         }
-        
+
         .blue input[type='submit'] {
             background: #e74c3c;
         }
-        
+
         .blue input[type='text'] {
             color: #222;
         }
-        
+
         .error,
         .success {
             background: #ffffff;
@@ -67,15 +67,15 @@
             margin: 0 0 5px 0;
             padding: 5px;
         }
-        
+
         .error {
             color: #c0392b;
         }
-        
+
         .success {
             color: #2cc36b;
         }
-        
+
         #clear-message {
             margin: 0 0 0 5px;
         }
@@ -83,359 +83,375 @@
 </head>
 
 <body>
-    <section class="container">
-        <h1>UrlShort</h1>
+<section class="container">
+    <h1>UrlShort</h1>
 
-        <div class="row">
-            <div class="one-third column">
-                <p>The following project was created for the purposes of the Java Programming Course in 2015, by way of demonstrating how much time the author had invested in understanding the use of Java with Servlets. It's a simple url shortner that consists of a relatively small API set as well as the ability to automatically re-direct to a site using the website url plus the short id e.g. www.example.com/ABCDE.</p>
-            </div>
-
-            <div class="two-thirds column">
-                <p>The backend Java code includes a host of coding techniques and styles, which showcase just how much has been learnt about the latest version of Java 8. The database access is level 3, in that the servlets interact with the backend DAO and then the SQLite database.</p>
-
-                <ol>
-                    <li>Regular expressions</li>
-
-                    <li>Lambda expressions</li>
-
-                    <li>Generic lists</li>
-
-                    <li>Object instantiation</li>
-
-                    <li>Date and time formatting</li>
-
-                    <li>Accessing a local SQLite and/or MariaDb database</li>
-
-                    <li>Use of static, final and primitive datatypes</li>
-
-                    <li>Base 36 encoding (encoding an integer into a unique id e.g. 4096 =&gt; FFYT0)
-                    </li>
-
-                    <li>Servlet design</li>
-                    
-                    <li>HTML5, CSS3, JavaScript and jQuery</li>
-                    
-                    <li>Responsive web design</li>
-
-                    <li>JavaScript Object Notation (JSON)</li>
-                </ol>
-            </div>
-        </div>
-    </section>
-
-    <section class="container blue">
-        <h2>API</h2>
-
-        <p>The API consists of GET and POST requests only, with an optional DELETE to clear the database (for demonstration purposes only).</p>
-
-        <p><strong>Note:</strong> To access the API from outside the website, first create a connection to the address e.g. www.example.com, then send either a GET or POST request using the associated parameter(s) e.g. GET /expand?shortid=<strong>ABCDE</strong>. Details as to the return values have been provided underneath the relevant requests.</p>
-
-        <div class="row">
-            <div class="two-thirds column">
-                <dl>
-                    <dt>GET /expand?shortid=<strong>ABCDE</strong></dt>
-
-                    <dd><strong>Param:</strong> shortid - A valid short id containing 5 characters from 0-9, A-Z.
-                        <br>
-                        <strong>Return:</strong> { "success": true/false, "id": shortId/null, "message": null/error message, "url": url/null }
-                    </dd>
-                </dl>
-            </div>
-
-            <div class="one-third column">
-                <form id="expand-id" action="expand" method="get">
-                    <input name="shortid" type="text">
-                    <input type="submit" value="Retrieve">
-                </form>
-                <div id="expand-message"></div>
-            </div>
+    <div class="row">
+        <div class="one-third column">
+            <p>The following project was created for the purposes of the Java Programming Course in 2015, by way of
+                demonstrating how much time the author had invested in understanding the use of Java with Servlets. It's
+                a simple url shortner that consists of a relatively small API set as well as the ability to
+                automatically re-direct to a site using the website url plus the short id e.g.
+                www.example.com/ABCDE.</p>
         </div>
 
-        <div class="row">
-            <div class="two-thirds column">
-                <dl>
-                    <dt>POST
+        <div class="two-thirds column">
+            <p>The backend Java code includes a host of coding techniques and styles, which showcase just how much has
+                been learnt about the latest version of Java 8. The database access is level 3, in that the servlets
+                interact with the backend DAO and then the SQLite database.</p>
+
+            <ol>
+                <li>Regular expressions</li>
+
+                <li>Lambda expressions</li>
+
+                <li>Generic lists</li>
+
+                <li>Object instantiation</li>
+
+                <li>Date and time formatting</li>
+
+                <li>Accessing a local SQLite and/or MariaDb database</li>
+
+                <li>Use of static, final and primitive datatypes</li>
+
+                <li>Base 36 encoding (encoding an integer into a unique id e.g. 4096 =&gt; FFYT0)
+                </li>
+
+                <li>Servlet design</li>
+
+                <li>HTML5, CSS3, JavaScript and jQuery</li>
+
+                <li>Responsive web design</li>
+
+                <li>JavaScript Object Notation (JSON)</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<section class="container blue">
+    <h2>API</h2>
+
+    <p>The API consists of GET and POST requests only, with an optional DELETE to clear the database (for demonstration
+        purposes only).</p>
+
+    <p><strong>Note:</strong> To access the API from outside the website, first create a connection to the address e.g.
+        www.example.com, then send either a GET or POST request using the associated parameter(s) e.g. GET
+        /expand?shortid=<strong>ABCDE</strong>. Details as to the return values have been provided underneath the
+        relevant requests.</p>
+
+    <div class="row">
+        <div class="two-thirds column">
+            <dl>
+                <dt>GET /expand?shortid=<strong>ABCDE</strong></dt>
+
+                <dd><strong>Param:</strong> shortid - A valid short id containing 5 characters from 0-9, A-Z.
+                    <br>
+                    <strong>Return:</strong> { "success": true/false, "id": shortId/null, "message": null/error message,
+                    "url": url/null }
+                </dd>
+            </dl>
+        </div>
+
+        <div class="one-third column">
+            <form id="expand-id" action="expand" method="get">
+                <input name="shortid" type="text">
+                <input type="submit" value="Retrieve">
+            </form>
+            <div id="expand-message"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="two-thirds column">
+            <dl>
+                <dt>POST
                     /shorten?url=<strong>http://www.github.com/softwarespot</strong></dt>
 
-                    <dd><strong>Param:</strong> url - A valid url which begins with http(s)
-                        <br>
-                        <strong>Return:</strong> { "success": true/false, "id": shortId/null, "message": null/error message, "url": url/null }
-                    </dd>
-                </dl>
-            </div>
-
-            <div class="one-third column">
-                <form id="update-id" action="shorten" method="post">
-                    <input name="url" type="text">
-                    <input type="submit" value="Submit">
-                </form>
-                <div id="update-message"></div>
-            </div>
+                <dd><strong>Param:</strong> url - A valid url which begins with http(s)
+                    <br>
+                    <strong>Return:</strong> { "success": true/false, "id": shortId/null, "message": null/error message,
+                    "url": url/null }
+                </dd>
+            </dl>
         </div>
-    </section>
 
-    <section class="container">
-        <p>As this is a demonstration and not a fully functioning site, a button to clear the database has been included as means of showing the SQLite/MariaDb is indeed working as one would expect. Check the console output for additional messages.</p>
-        <button onclick="destroy()" type="button">Clear DB</button>
-        <span id="clear-message"></span>
+        <div class="one-third column">
+            <form id="update-id" action="shorten" method="post">
+                <input name="url" type="text">
+                <input type="submit" value="Submit">
+            </form>
+            <div id="update-message"></div>
+        </div>
+    </div>
+</section>
 
-        <p><strong>Note:</strong> This will clear the contents of the database.</p>
-    </section>
+<section class="container">
+    <p>As this is a demonstration and not a fully functioning site, a button to clear the database has been included as
+        means of showing the SQLite/MariaDb is indeed working as one would expect. Check the console output for
+        additional messages.</p>
+    <button onclick="destroy()" type="button">Clear DB</button>
+    <span id="clear-message"></span>
 
-    <!--Scripts-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script>
-        //Created: 2015/04/22
+    <p><strong>Note:</strong> This will clear the contents of the database.</p>
+</section>
 
-        /*
-        TODO:
-        Update to VanillaJS at some point: http://vanilla-js.com ;-)
-        */
+<!--Scripts-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    //Created: 2015/04/22
 
-        "use strict";
+    /*
+     TODO:
+     Update to VanillaJS at some point: http://vanilla-js.com ;-)
+     */
 
-        (function($, window, document) {
-            // Within this function, $ will always refer to jQuery
-            eventHandlers($, window, document);
-        })(jQuery, window, document);
+    "use strict";
 
-        //Event handlers
-        function eventHandlers($, window, document) {
-            var submission = function(event) {
-                // Clear the contents
-                var $clear = $("#clear-message");
-            	$clear.text("");
-            	$clear.removeClass();
+    (function ($, window, document) {
+        // Within this function, $ will always refer to jQuery
+        eventHandlers($, window, document);
+    })(jQuery, window, document);
 
-                // Stop the form from submitting
-                event.preventDefault();
+    //Event handlers
+    function eventHandlers($, window, document) {
+        var submission = function (event) {
+            // Clear the contents
+            var $clear = $("#clear-message");
+            $clear.text("");
+            $clear.removeClass();
 
-                // Store the object references
-                var $form = $(this);
+            // Stop the form from submitting
+            event.preventDefault();
 
-                // Is this a GET or POST request?
-                var isExpand = $form.attr("method").toLowerCase() === "get"
+            // Store the object references
+            var $form = $(this);
 
-                var $output = $("#" + (isExpand ? "expand" : "update") + "-message");
+            var action = $form.attr("action").toLowerCase();
 
-                // Delete the previous values set
-                $output.removeClass();
-                $output.text("");
+            // Is this a GET or POST request?
+            var isExpand = action === "expand";
 
-                // Create a variable to hold the response
-                var response = null;
+            var $output = $("#" + (isExpand ? "expand" : "update") + "-message");
 
-                // If a GET request
-                if (isExpand) {
-                    // Send the data using a GET request
-                    response = $.get(
-                        $form.attr("action"),
+            // Delete the previous values set
+            $output.removeClass();
+            $output.text("");
+
+            // Create a variable to hold the response
+            var response = null;
+
+            // If a GET request
+            if (isExpand) {
+                // Send the data using a GET request
+                response = $.get(
+                        action,
                         $form.serialize(),
                         "json"
-                    );
-                } else { // If a POST request
-                    // Send the data using a POST request
-                    response = $.post(
-                        $form.attr("action"),
+                );
+            } else { // If a POST request
+                // Send the data using a POST request
+                response = $.post(
+                        action,
                         $form.serialize(),
                         "json"
-                    );
-                }
+                );
+            }
 
-                // Set the results to the contact-message div when done
-                response.done(function(data) { // JSON object
-                    /** @namespace data.id */
-                    /** @namespace data.message */
-                    /** @namespace data.success */
-                    /** @namespace data.url */
+            // Set the results to the contact-message div when done
+            response.done(function (data) { // JSON object
+                /** @namespace data.id */
+                /** @namespace data.message */
+                /** @namespace data.success */
+                /** @namespace data.url */
 
-                    // If the request was to expand
-                    if (data.success) {
-                        // Add the success class
-                        $output.addClass("success");
+                // If the request was to expand
+                if (data.success) {
+                    // Add the success class
+                    $output.addClass("success");
 
-                        if (isExpand) {
-                            $output.text("The short id " +
-                                data.id + " navigates to " +
-                                data.url);
-                        } else {
-                            $output.text(
+                    if (isExpand) {
+                        $output.text("The short id " +
+                        data.id + " navigates to " +
+                        data.url);
+                    } else {
+                        $output.text(
                                 "Added to the database with the short id of " +
                                 data.id);
-                        }
-                    } else {
-                        // Add the error class
-                        $output.addClass("error");
-
-                        $output.text("Error: " +
-                            data.message);
                     }
-                });
-
-                response.fail(function() {
+                } else {
                     // Add the error class
                     $output.addClass("error");
 
-                    // If the request was to expand
-                    $output.text(
+                    $output.text("Error: " +
+                    data.message);
+                }
+            });
+
+            response.fail(function () {
+                // Add the error class
+                $output.addClass("error");
+
+                // If the request was to expand
+                $output.text(
                         "A serious error occurred that the target server never replied"
-                    );
-                });
-            }
+                );
+            });
+        };
 
-            // Send a GET/POST request using AJAX and the convenience function
-            $("#expand-id").submit(submission);
-            $("#update-id").submit(submission);
-        }
+        // Send a GET/POST request using AJAX and the convenience function
+        $("#expand-id").submit(submission);
+        $("#update-id").submit(submission);
+    }
 
-        // START: OLD CODE //
-        var formExpand = document.getElementById("expand-id-old");
-        if (formExpand !== null) { // Check if the id exists
-            formExpand.onsubmit = function(env) {
-                // Prevent default submission
-                env.preventDefault();
-
-                // Get the clear message id element
-                var output = document.getElementById("expand-message");
-
-                // Get the form data
-                var formData = new FormData(formExpand);
-
-                // AJAX object reference
-                var request = new XMLHttpRequest();
-                request.open("GET", formExpand.getAttribute("action"), true);
-
-                // On load callback
-                request.onload = function() {
-                    var data = JSON.parse(request.responseText);
-                    if (request.status === 200 && data.success === true) {
-                        // Success
-                        output.className = "success";
-                        output.innerHTML =
-                            "The short id " +
-                            data.id + " navigates to " +
-                            data.url;
-                    } else {
-                        // We reached our target server, but it returned an error
-                        output.className = "error";
-                        output.innerHTML = "Error: " +
-                            data.message;
-                    }
-                };
-
-                // On error callback
-                request.onerror = function() {
-                    // A serious error occurred
-                    output.className = "error";
-                    output.innerHTML =
-                        "A serious error occurred that the target server never replied";
-                };
-
-                // Send form data using the request
-                request.send(formData);
-
-                return false;
-            };
-        }
-
-        var formUpdate = document.getElementById("update-id-old");
-        if (formUpdate !== null) { // Check if the id exists
-            formUpdate.onsubmit = function(env) {
-                // Prevent default submission
-                env.preventDefault();
-
-                // Get the clear message id element
-                var output = document.getElementById("update-message");
-
-                // Get the form data
-                var formData = new FormData(formUpdate);
-
-                // AJAX object reference
-                var request = new XMLHttpRequest();
-                request.open("POST", formUpdate.getAttribute("action"), true);
-
-                // On load callback
-                request.onload = function() {
-                    var data = JSON.parse(request.responseText);
-                    if (request.status === 200 && data.success === true) {
-                        // Success
-                        output.className = "success";
-                        output.innerHTML =
-                            "Added to the database with the short id of " +
-                            data.id;
-                    } else {
-                        // We reached our target server, but it returned an error
-                        output.className = "error";
-                        output.innerHTML = "Error: " +
-                            data.message;
-                    }
-                };
-
-                // On error callback
-                request.onerror = function() {
-                    // A serious error occurred
-                    output.className = "error";
-                    output.innerHTML =
-                        "A serious error occurred that the target server never replied";
-                };
-
-                // Send form data using the request
-                request.send(formData);
-
-                return false;
-            };
-        }
-
-        // END: OLD CODE //
-
-        // An example of not using jQuery
-        function destroy() {
-            // Destroy the contents of the other outputs
-            var expand = document.getElementById("expand-message");
-            var update = document.getElementById("update-message");
-
-            expand.className = "";
-            expand.innerHTML = "";
-
-            update.className = "";
-            update.innerHTML = "";
+    // START: OLD CODE //
+    var formExpand = document.getElementById("expand-id-old");
+    if (formExpand !== null) { // Check if the id exists
+        formExpand.onsubmit = function (env) {
+            // Prevent default submission
+            env.preventDefault();
 
             // Get the clear message id element
-            var output = document.getElementById("clear-message");
+            var output = document.getElementById("expand-message");
+
+            // Get the form data
+            var formData = new FormData(formExpand);
 
             // AJAX object reference
             var request = new XMLHttpRequest();
-            request.open("DELETE", "clear", true);
+            request.open("GET", formExpand.getAttribute("action"), true);
 
             // On load callback
-            request.onload = function() {
+            request.onload = function () {
                 var data = JSON.parse(request.responseText);
                 if (request.status === 200 && data.success === true) {
                     // Success
                     output.className = "success";
                     output.innerHTML =
-                        "The database was successfully cleared";
+                            "The short id " +
+                            data.id + " navigates to " +
+                            data.url;
                 } else {
                     // We reached our target server, but it returned an error
                     output.className = "error";
                     output.innerHTML = "Error: " +
-                        data.message;
+                    data.message;
                 }
             };
 
             // On error callback
-            request.onerror = function() {
+            request.onerror = function () {
                 // A serious error occurred
                 output.className = "error";
                 output.innerHTML =
-                    "A serious error occurred that the target server never replied";
+                        "A serious error occurred that the target server never replied";
             };
 
-            // Send using the request
-            request.send();
-        }
-    </script>
+            // Send form data using the request
+            request.send(formData);
+
+            return false;
+        };
+    }
+
+    var formUpdate = document.getElementById("update-id-old");
+    if (formUpdate !== null) { // Check if the id exists
+        formUpdate.onsubmit = function (env) {
+            // Prevent default submission
+            env.preventDefault();
+
+            // Get the clear message id element
+            var output = document.getElementById("update-message");
+
+            // Get the form data
+            var formData = new FormData(formUpdate);
+
+            // AJAX object reference
+            var request = new XMLHttpRequest();
+            request.open("POST", formUpdate.getAttribute("action"), true);
+
+            // On load callback
+            request.onload = function () {
+                var data = JSON.parse(request.responseText);
+                if (request.status === 200 && data.success === true) {
+                    // Success
+                    output.className = "success";
+                    output.innerHTML =
+                            "Added to the database with the short id of " +
+                            data.id;
+                } else {
+                    // We reached our target server, but it returned an error
+                    output.className = "error";
+                    output.innerHTML = "Error: " +
+                    data.message;
+                }
+            };
+
+            // On error callback
+            request.onerror = function () {
+                // A serious error occurred
+                output.className = "error";
+                output.innerHTML =
+                        "A serious error occurred that the target server never replied";
+            };
+
+            // Send form data using the request
+            request.send(formData);
+
+            return false;
+        };
+    }
+
+    // END: OLD CODE //
+
+    // An example of not using jQuery
+    function destroy() {
+        // Destroy the contents of the other outputs
+        var expand = document.getElementById("expand-message");
+        var update = document.getElementById("update-message");
+
+        expand.className = "";
+        expand.innerHTML = "";
+
+        update.className = "";
+        update.innerHTML = "";
+
+        // Get the clear message id element
+        var output = document.getElementById("clear-message");
+
+        // AJAX object reference
+        var request = new XMLHttpRequest();
+        request.open("DELETE", "clear", true);
+
+        // On load callback
+        request.onload = function () {
+            var data = JSON.parse(request.responseText);
+            if (request.status === 200 && data.success === true) {
+                // Success
+                output.className = "success";
+                output.innerHTML =
+                        "The database was successfully cleared";
+            } else {
+                // We reached our target server, but it returned an error
+                output.className = "error";
+                output.innerHTML = "Error: " +
+                data.message;
+            }
+        };
+
+        // On error callback
+        request.onerror = function () {
+            // A serious error occurred
+            output.className = "error";
+            output.innerHTML =
+                    "A serious error occurred that the target server never replied";
+        };
+
+        // Send using the request
+        request.send();
+    }
+</script>
 </body>
 
 </html>
