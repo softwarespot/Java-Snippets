@@ -41,7 +41,7 @@ public class ExpandServlet extends HttpServlet {
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 
 		// Retrieve the shortid parameter e.g. GET /expand?shortid=ABCDE
-		final String shortId = request.getParameter("shortid");
+		String shortId = request.getParameter("shortid");
 
 		// Parameter(s)
 		System.out.println("1. " + shortId);
@@ -54,6 +54,7 @@ public class ExpandServlet extends HttpServlet {
 		String message = null, url = null;
 		if (shortId == null || shortId.isEmpty()) {
 			message = UrlShortStrings.EXPAND_NULL_OR_EMPTY;
+			shortId = null;
 		} else if (!UrlShortHelper.isShortId(shortId)) {
 			message = UrlShortStrings.EXPAND_INVALID_FORMAT;
 		} else {

@@ -41,7 +41,7 @@ public class UpdateServlet extends HttpServlet {
 		response.setContentType(UrlShortStrings.WRITE_JSON);
 
 		// Retrieve the url parameter e.g. POST /shorten?url=http://www.example.com
-		final String url = request.getParameter("url");
+		String url = request.getParameter("url");
 
 		// Parameter(s)
 		System.out.println("1. " + url);
@@ -54,6 +54,7 @@ public class UpdateServlet extends HttpServlet {
 		String message = null, shortId = null;
 		if (url == null || url.isEmpty()) {
 			message = UrlShortStrings.UPDATE_NULL_OR_EMPY;
+			url = null;
 		} else if (!UrlShortHelper.isValidUrl(url)) {
 			message = UrlShortStrings.UPDATE_INVALID_FORMAT;
 		} else {
