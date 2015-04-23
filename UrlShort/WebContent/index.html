@@ -284,7 +284,9 @@
                     $output.addClass("error");
 
                     $output.text("Error: " +
-                    data.message);
+                    data.message +
+                    ((data.id.trim() !== ""  || data.id === "null" || data.id === null) ? ", with the short id of " +
+                        data.id : "");
                 }
             });
 
@@ -292,7 +294,6 @@
                 // Add the error class
                 $output.addClass("error");
 
-                // If the request was to expand
                 $output.text(
                         "A serious error occurred that the target server never replied"
                 );
@@ -304,7 +305,8 @@
         $("#update-id").submit(submission);
     }
 
-    // START: OLD CODE //
+    // START: OUTDATED AND UNUSED //
+    /*
     var formExpand = document.getElementById("expand-id-old");
     if (formExpand !== null) { // Check if the id exists
         formExpand.onsubmit = function (env) {
@@ -402,7 +404,8 @@
         };
     }
 
-    // END: OLD CODE //
+    // END: OUTDATED AND UNUSED //
+    */
 
     // An example of not using jQuery
     function destroy() {
@@ -426,7 +429,7 @@
         // On load callback
         request.onload = function () {
             var data = JSON.parse(request.responseText);
-            if (request.status === 200 && data.success === true) {
+            if (request.status === 200 && data.success === true) { // 200 ==  OK
                 // Success
                 output.className = "success";
                 output.innerHTML =
