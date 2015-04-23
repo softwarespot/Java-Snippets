@@ -285,8 +285,7 @@
 
                     $output.text("Error: " +
                     data.message +
-                    ((data.id.trim() !== ""  || data.id === "null" || data.id === null) ? ", with the short id of " +
-                        data.id : "");
+                    ((!isExpand && data.id !== null) ? ", with the short id of " + data.id : ""));
                 }
             });
 
